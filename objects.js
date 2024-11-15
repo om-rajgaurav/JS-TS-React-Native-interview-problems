@@ -64,10 +64,10 @@ let users = {
 
 
 let clone = Object.assign({},users) 
-clone.name = 'raj'
+clone.name = 'raj'   
 console.log(users,clone)
 
-// another way to do this
+// another way to do this 
 
 let clone1 = JSON.parse(JSON.stringify(users))
 clone1.name = 'raj1'

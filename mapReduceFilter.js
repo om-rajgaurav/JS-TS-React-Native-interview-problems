@@ -44,7 +44,7 @@ Array.prototype.myReduce = function (cb, initialValue) {
 
 
 const res0 = arr.myReduce((acc, item) => {
-  return acc + item;
+  return acc + item; 
 });
 
 console.log('res',res0);

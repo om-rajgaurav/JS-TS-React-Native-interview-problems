@@ -68,7 +68,7 @@ addSix(21) // 27
 
 
 function find(index){
-
+ 
     let temp = []
     for (let i = 0; i < 1000000; i++) {
         

@@ -57,7 +57,7 @@ apple(...a); //rest operator
 
  function greet(name){
     // console.log('hello',name);
-}
+} 
 
  function callGreet(callback){
     const name = "raj"

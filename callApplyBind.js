@@ -9,7 +9,7 @@ function sayName(age) {
     return this.name + " my age is " + age
 }
 
-
+ 
 // so the solution is 
 console.log(sayName.call(obj,24)) //sachin;
 
