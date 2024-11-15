@@ -65,4 +65,5 @@ const a = Promise.resolve(3);
 const b = Promise.reject("error");
 const c = Promise.resolve(9);
 let res = Promise.all([a, b, c]);
+let newRes = Promise.allSettled([a, b, c]);
 console.log(res);
