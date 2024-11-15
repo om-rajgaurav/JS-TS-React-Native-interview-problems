@@ -1,5 +1,7 @@
 // Objects
 
+// Question 1: How to delete a property in an object in JavaScript?
+
 let user = {
     name: 'sachin',
     age: 23
@@ -11,6 +13,8 @@ delete user.age
 
 console.log(user)// { name: 'sachin' }
 
+// Question 2: How to delete a property in an object in JavaScript when the property is a variable?
+
 const func = (
     function (a) {
         delete a
@@ -19,6 +23,8 @@ const func = (
 )(5)
 
 console.log(func)// 5 delete do not affect local variable so 5 is printed
+
+// Question 3: How to delete a property in an object in JavaScript when the property is an object?
 
 const a = {}
 const b={key:"b"}
@@ -39,6 +45,8 @@ a["[object,Object]"] = 123 //a[b] = 456
 
 console.log([..."raj"])  // [ 'r', 'a', 'j' ]
 
+// Question 4: How to create a deep copy of an object in JavaScript?
+
 const value  = {number:10}
 
 function multiply(x={...value}){
@@ -51,7 +59,7 @@ multiply(value)
 multiply(value)
 
 
-// deep copy example
+// Question 5: How to create a deep copy of an object in JavaScript using JSON.parse(JSON.stringify())?
 
 let users = {
     name: 'sachin',
@@ -79,7 +87,8 @@ const clone3 = {...users}
 clone3.name = 'raj2'
 console.log(users,clone3)
 
-// shallow copy example
+// Question 6: How to create a shallow copy of an object in JavaScript?
+
 let users1 = {
     name: 'sachin', 
     age: 23,
@@ -93,5 +102,4 @@ let users1 = {
 let clone2 = users1
 clone2.name = 'rajtest'
 console.log(users1,clone2) // it modified the original object
-
 
