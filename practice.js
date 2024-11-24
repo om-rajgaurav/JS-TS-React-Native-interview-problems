@@ -67,3 +67,38 @@ const c = Promise.resolve(9);
 let res = Promise.all([a, b, c]);
 let newRes = Promise.allSettled([a, b, c]);
 console.log(res);
+
+//Global logic question
+let input = {
+  a: { b: "c" },
+  d: { e: { f: { g: "h" } } },
+  1: "j",
+  k: { 1: { m: "n" } },
+};
+
+// let output = {
+//   "a.b": "c",
+//   "d.e.f.g": "h",
+//   "1": "j",
+//   "k.1.m": "n"
+// };
+
+function transform(input) {
+  let result = {};
+
+  function flattern(obj, prefix = "") {
+    Object.entries(obj).forEach(([key, value]) => {
+      let newKey = prefix ? `${prefix}.${key}` : key;
+      if (typeof value === "object" && value != null) {
+        flattern(value, newKey);
+      } else {
+        result[newKey] = value;
+      }
+    });
+  }
+  flattern(input);
+  console.log(result);
+}
+
+let output = transform(input);
+console.log(output);
