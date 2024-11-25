@@ -102,3 +102,21 @@ function transform(input) {
 
 let output = transform(input);
 console.log(output);
+
+const transformA = (input) => {
+  return Object.entries(obj).reduce(
+    (acc, [key, value]) =>
+      typeof value === "object"
+        ? { ...acc, ...transformA(`${key}.`) }
+        : { ...acc, [key]: value },
+    {}
+  );
+};
+
+function flattern(arr) {
+  return arr.reduce((flat, value) => {
+    return flat.concat(Array.isArray(value) ? flattern(value) : value);
+  }, []);
+}
+
+console.log(flattern([2, [5, 6], [[[345, 7]]]]));
