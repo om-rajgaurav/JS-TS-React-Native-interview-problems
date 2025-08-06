@@ -95,3 +95,85 @@ const linking = {
   ```
 - Add fallback defaults and sync on app start
 
+
+
+## Real-World Feature Design: Search Screen (Zomato-like)
+
+Imagine building a search screen with live results, filters, and recent searches.
+
+**How would you architect this for performance, modularity, and smooth UX?**
+
+---
+
+### Interview-Ready Enhancements
+
+#### 1. Folder Structure
+
+```
+src/
+  screens/
+    SearchScreen.tsx
+  components/
+    SearchInput.tsx
+    SearchResults.tsx
+    RecentSearches.tsx
+    FiltersModal.tsx
+  store/
+    searchSlice.ts
+```
+
+#### 2. State Management
+
+Use **Redux Toolkit**:
+
+```typescript
+// searchSlice.ts
+initialState: {
+  searchText: '',
+  results: [],
+  recentSearches: [],
+  loading: false,
+}
+```
+Add actions: `addRecentSearch(term)` and `clearSearches()`.
+
+#### 3. Debouncing User Input
+
+Custom hook example:
+
+```typescript
+function useDebounce(value: string, delay = 300) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(timeout);
+  }, [value]);
+
+  return debouncedValue;
+}
+```
+Use before triggering API calls.
+
+#### 4. API Integration
+
+- Use **RTK Query** or **React Query** for fetching.
+- Add caching (reuse results for repeated queries).
+
+#### 5. Filter System
+
+- Filter icon opens `FiltersModal`.
+- Store filters in local state.
+- Apply simple filters client-side (e.g., price, rating).
+- For complex filters (e.g., distance), re-fetch from API with query params.
+
+#### 6. Optimizations
+
+| Area           | Technique                                      |
+|----------------|------------------------------------------------|
+| API performance| Debounce + Cancel previous requests            |
+| UX             | Skeleton loaders or shimmer                    |
+| Offline        | Cache last results with MMKV                   |
+| Smooth list    | FlatList with `getItemLayout`, `initialNumToRender` |
+| Search history | Store in MMKV + Redux                          |
+
