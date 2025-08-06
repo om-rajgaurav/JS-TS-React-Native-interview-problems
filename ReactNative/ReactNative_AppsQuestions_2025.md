@@ -211,3 +211,108 @@ Mention **TurboModules** and **JSI** (since React Native 0.71+):
 - Faster than old bridge
 - Enables **synchronous calls**
 - Improves performance
+
+
+
+## Question 6: useEffect Deep Dive
+
+**Explain how useEffect works in React Native.  
+What’s the difference between `useEffect(() => {...}, [])` and `useEffect(() => {...}, [someVar])`?**
+
+---
+
+### ✅ Polished A+ Answer (for Interviews):
+
+`useEffect` is a React hook used to perform side effects in functional components. It replaces lifecycle methods from class components, such as:
+
+- `componentDidMount`
+- `componentDidUpdate`
+- `componentWillUnmount`
+
+**Hook signature:**  
+```js
+useEffect(() => { /* side effect */ }, [dependencies])
+```
+
+- `useEffect(() => {...}, [])`: Runs only once, after the component mounts.
+- `useEffect(() => {...}, [someVar])`: Runs after mount and again every time `someVar` changes.
+
+If you return a function from `useEffect`, that function acts as a cleanup, and is called:
+- Before the component unmounts.
+- Or before the next effect runs (if dependencies change).
+
+**Example:**
+```tsx
+useEffect(() => {
+  const interval = setInterval(fetchData, 1000);
+  return () => clearInterval(interval); // cleanup
+}, []);
+```
+
+**Common Mistakes:**
+- Forgetting to include dependencies in the array (can lead to stale values).
+- Including too many dependencies (causes unnecessary re-renders).
+- Making async functions directly inside `useEffect` (instead, define an async function and call it inside).
+- Not cleaning up subscriptions, event listeners, or intervals.
+
+---
+
+## 🔥 Ready for Question 7 (Testing in React Native)?
+
+**What testing libraries do you use in React Native?  
+How do you test components and business logic?  
+What’s the difference between unit testing and integration testing in React Native context?**
+
+---
+
+### ✅ Polished Interview-Ready Version of Your Answer:
+
+I've used **Jest**, which is the default test runner in React Native projects. My experience is mostly around unit testing for business logic.
+
+For example, I write `.test.ts` files and use `describe` blocks to group tests and `it()` or `test()` functions to write specific assertions using `expect`.
+
+For testing components, I've used **React Native Testing Library (RNTL)**, which builds on top of `react-test-renderer` and provides APIs like:
+- `render()`, `fireEvent()`, and `getByText()` for testing UI behavior.
+
+I'm still improving in this area and haven’t worked much on integration or E2E testing, but I understand the difference:
+
+---
+
+### 🔍 Unit vs Integration Testing (Explain This Clearly):
+
+| Type           | What it Tests                                               | Tool Used           |
+|----------------|------------------------------------------------------------|---------------------|
+| Unit Test      | Tests isolated logic (e.g., a function, reducer, hook)      | Jest                |
+| Integration Test | Tests how components work together (e.g., button click triggers an API call and updates UI) | RNTL + Jest         |
+| E2E Test       | Simulates full user journey across screens                  | Detox               |
+
+---
+
+### 🔧 Bonus Example for a Business Logic Test
+
+**mathUtils.ts**
+```ts
+export const add = (a: number, b: number) => a + b;
+```
+
+**mathUtils.test.ts**
+```ts
+describe('add function', () => {
+  it('adds two numbers correctly', () => {
+    expect(add(2, 3)).toBe(5);
+  });
+});
+```
+
+---
+
+### ✅ Final Verdict:
+
+**Score:** 6/10  
+**What to Improve:**
+- Learn at least basics of React Native Testing Library
+- Practice writing a test for one small UI component
+- Be able to define unit vs integration vs E2E testing
+- You don’t need to know Detox right now, but mentioning it earns bonus points
+
+
