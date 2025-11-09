@@ -1,4 +1,4 @@
-1.Why is my image visible on Android but not on iOS when using react-native-fast-image, and how can I debug and fix it?
+1. Why is my image visible on Android but not on iOS when using react-native-fast-image, and how can I debug and fix it?
 
 Ans:
 This issue usually occurs due to incorrect image URLs, missing HTTPS support, or iOS permission/configuration issues.
